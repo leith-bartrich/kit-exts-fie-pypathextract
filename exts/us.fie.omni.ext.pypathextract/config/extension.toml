@@ -1,0 +1,29 @@
+[package]
+# Semantic Versionning is used: https://semver.org/
+version = "1.0.0"
+
+# The title and description fields are primarily for displaying extension info in UI
+title = "FIE PythonPath Extractor"
+description="Used to extract a useful set of extension directories for populating PYTHONPATH in some development scenarios."
+
+# Path (relative to the root) or content of readme markdown file for UI.
+readme  = "docs/README.md"
+
+# URL of the extension source repository.
+repository = ""
+
+# One of categories for UI.
+category = "Other"
+
+# Keywords for the extension
+keywords = ["kit", "fie", "dev","extensions","python"]
+
+
+# Use omni.ui to build simple UI
+[dependencies]
+"omni.kit.uiapp" = {}
+"omni.kit.window.filepicker" = {}
+
+# Main python module this extension provides, it will be publicly available as "import us.fie.omni.ext.pypathextract".
+[[python.module]]
+name = "us.fie.omni.ext.pypathextract"
