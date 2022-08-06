@@ -75,7 +75,7 @@ class MyExtension(omni.ext.IExt):
         lines = []
 
         for ext in extensions:
-            line = ext['path'] + "\n"
+            line = self.ext_to_line(ext) + "\n"
             lines.append(line)
         
         print("Writing all to: " + write_path)
@@ -100,12 +100,20 @@ class MyExtension(omni.ext.IExt):
 
         for ext in extensions:
             if ext['enabled'] == True:
-                line = ext['path'] + "\n"
+                line = self.ext_to_line(ext) + "\n"
                 lines.append(line)
         
         print("Writing enabled to: " + write_path)
         with open(write_path,'wt') as f:
             f.writelines(lines)
+
+    def ext_to_line(self, ext) -> str:
+        ret = ""
+        pre_bundle_dir = '/'.join([ext['path'],"pip_prebundle"])
+        if os.path.exists(pre_bundle_dir):
+            ret = pre_bundle_dir + "\n"
+        ret += ext['path']
+        return ret
 
     def make_save_win(self):
         app_path = carb.tokens.get_tokens_interface().resolve("${app}")
